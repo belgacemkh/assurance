@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Projects Finance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-alt {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .content-block {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .content-block h3 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .content-block p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Global Projects Finance</h1>
+            <p class="hero-subtitle">Telemetrics & Capabilities - Empowering your financial future with innovative solutions</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Our Vision</h2>
+            <div class="content-block">
+                <p>Providing credit and financing is tricky, but finding the right candidates is easier with the right data. Our Telemetrics tool allows Asset Managers to have received full disclosure about clients operations with a top-down approach. This can be from the wider context of market trends to a single product level or by geographical area to client cluster.</p>
+                <p>We customize solutions to meet our client's strategic and financial objectives, and take a true advisory approach into our engagements and long-term relationships.</p>
+                <div class="highlight-box">
+                    <strong>When you put our financing to work for you, you will have a dedicated team working with you along the way.</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Technology Financing Solutions</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: #555;">We customize solutions to meet our client's strategic and financial objectives, and take a true advisory approach into our engagements and long-term relationships.</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">💳</div>
+                    <h3>Revolving Credit Lines</h3>
+                    <p>Flexible revolving lines of credit designed specifically for technology businesses to maintain cash flow and seize opportunities.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Real Estate Term Loans</h3>
+                    <p>Long-term real estate financing solutions tailored for technology companies expanding their physical presence.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>Cash Flow Term Loans</h3>
+                    <p>Strategic cash flow term loans to support your technology business operations and growth initiatives.</p>
+                </div>
+            </div>
+
+            <div class="content-block" style="margin-top: 40px;">
+                <p>Get the resources your tech company needs to invest in Research & Development (R&D), market expansion and more. We can help with tech-savvy financing and consulting solutions. Anytime, anywhere, one click will be the key for Asset Managers to get the right actionable insight to move forward with their business. Meet our team of experts and get to know us and our work.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Healthcare Finance Solutions</h2>
+            
+            <div class="content-block">
+                <p>Global Projects proudly serves healthcare providers involved in all aspects of healthcare services, from home health to nursing home care. Our senior management team has over 50 years of expertise in helping healthcare organizations address their needs for growth and financial management to overcome obstacles—regardless of specialty.</p>
+            </div>
+
+            <div class="two-column">
+                <div class="content-block">
+                    <h3>Cost-Effective Financing</h3>
+                    <p>We can help you obtain cost-effective financing solutions for the renovation, expansion, or replacement of existing facilities, as well as restructuring or refunding existing indebtedness.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Credit Enhancement</h3>
+                    <p>We are versed in all forms of credit enhancement, which include bank Letters of Credit (LC), Bank Guarantee (BG), Bond Insurance, FHA insurance or using the strength of a sister organization in order to provide the credit necessary to complete a complicated transaction.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Credit Structures & Instruments</h3>
+                <p>Our breadth of experience in Healthcare Financing has enabled us to develop a variety of innovative credit structures to successfully execute even the most complex financing.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Healthcare Finance Facilities</h2>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Typical Uses</h3>
+                    <ul class="feature-list">
+                        <li>Support working capital and general corporate purposes</li>
+                        <li>Fund capital expenditures</li>
+                        <li>Accommodate growth</li>
+                        <li>Refinance existing corporate or facility debt</li>
+                        <li>Repurchase stock or finance dividend payments</li>
+                        <li>Facilitate mergers, acquisitions, or management buyouts</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Organizations We Serve</h3>
+                    <ul class="feature-list">
+                        <li>Health systems and hospitals</li>
+                        <li>Ambulatory surgery centers</li>
+                        <li>Hospital and physician joint ventures</li>
+                        <li>Oncology facilities</li>
+                        <li>Imaging centers</li>
+                        <li>Physician groups</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block" style="margin-top: 40px;">
+                <p>Having access to working capital and funding capital expenditures is a constant concern in the healthcare industry. Whether you are looking to grow your business or increase liquidity to cope with reimbursement or regulatory changes, working with an experienced and knowledgeable lender can make all the difference. We can provide your company with the capital it needs, along with financial guidance you can trust, to help achieve your business goals.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Healthcare & Hospital Finance Services</h2>
+            
+            <div class="content-block">
+                <p>Global Projects has achieved a unique position within the healthcare sector due to our ability to implement financing solutions that incorporate a variety of financial tools to meet our client's needs. Our firm has developed a suite of innovative products and services that accommodate the most complex financing for virtually every type of for-profit and not-for-profit hospital and health system.</p>
+                
+                <p>Whether your healthcare organization is a single site community or has a national or international presence, Global Projects has the expertise and resources to help you achieve your financing needs. Global Projects provides leasing or financing to healthcare organizations for medical equipment, healthcare information technology, facility buildouts, leasehold improvement projects, office expansions, or renovations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <div class="container">
+            <h2>Working Together to Promote your Financial Wellbeing</h2>
+            <p style="margin-bottom: 30px;">We value customer and business relationships. At Global Projects our primary goal is to build and maintain a strong and trusted relationship with each client based on the delivery of services, which go beyond the financing itself, and enables clients to meet their goals.</p>
+            <p>The effectiveness of our team is evident in our plan of finance that pursues the lowest cost of capital, regardless of the market movements and a trusted advisor relationship that extends beyond the financing.</p>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
